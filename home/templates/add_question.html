@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Add Question {% endblock %}
+
+{% block body %}
+<div style="width: 60%; max-width: 800px; margin: auto; background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); margin-top: 20px;">
+    <h2 style="text-align: center; font-size: 1.5rem; color: #333;">Add Question</h2>
+    <form action="/add_question/" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background-color: #17a2b8; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+            Submit
+        </button>
+    </form>
+    <br>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #17a2b8; color: white; text-align: left;">
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Question</th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Quiz</th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+            <tr style="background-color: {% cycle '#f1f8fb' '#ffffff' %};">
+                <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                    <a href="/add_options/{{question.id}}/" style="color: #007bff; text-decoration: none; font-weight: bold;">
+                        {{question.content}}
+                    </a>
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{question.quiz}}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                    <a href="/delete_question/{{question.id}}/" style="background-color: #dc3545; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

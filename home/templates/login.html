@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} Login Page {% endblock %}
+{% block css %}
+<style>
+    .head1 {
+        color: #fb30ed;
+        font-size: 2rem;
+        font-weight: bold;
+        height: 50px;
+    }
+
+    .head2 {
+        color: #EF4926;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    /* Centering styles */
+    .centered-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100vh; /* Full viewport height */
+        background-color: #f8f9fa; /* Background color */
+    }
+
+    /* Login box styles */
+    .login-box {
+        width: 100%; /* Stretch to full width */
+        max-width: 400px; /* Set a maximum width to prevent excessive stretching */
+        background-color: #fff; /* White background */
+        border-radius: 15px; /* Rounded corners */
+        padding: 30px; /* Padding inside the box */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        text-align: center; /* Center text */
+    }
+
+    .form-label {
+        font-weight: bold; /* Make label text bold */
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="centered-container">
+    <div class="login-box">
+        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold text-center" style="color:black; font-weight: bold; font-size: 1.5rem;">Login Details</div>
+        <br>
+        <form method="POST" action="/login/">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" placeholder="Enter Username" class="form-control" id="username" name="username" required style="text-align: center; border-radius: 10px; border: 1px solid #ced4da;">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" placeholder="Enter Password" class="form-control" id="password" name="password" required style="text-align: center; border-radius: 10px; border: 1px solid #ced4da;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="border-radius: 10px; background-color: #007bff; color: white;">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

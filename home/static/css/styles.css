@@ -1,0 +1,61 @@
+.container-fluid {
+    height: 60px;
+  }
+  
+  .head1 {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    height: 50px;
+  }
+  
+  .head2 {
+    color: #2647ef;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+  nav ul li {
+      display: inline;
+      margin-right: 15px;
+  }
+
+  nav ul li a {
+      text-decoration: none;
+      color: #333;
+  }
+
+  nav ul li a:hover {
+      text-decoration: underline;
+  }
+
+
+  /* Centering styles (if needed for other parts of the page) */
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+  }
+  
+  .login-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  

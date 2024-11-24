@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %} Sign Up {% endblock %}
+{% block css %}
+<style>
+    .head1 {
+        color: #FBAD30;
+        font-size: 2rem;
+        font-weight: bold;
+        height: 50px;
+    }
+
+    .head2 {
+        color: #EF4926;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        text-align: center;
+        width: 100%; /* Make inputs stretch to the full width */
+        border-radius: 10px; /* Rounded corners for inputs */
+        border: 1px solid #ced4da; /* Border color for inputs */
+    }
+
+    /* Centering styles */
+    .centered-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 120vh; /* Full viewport height */
+    }
+
+    /* Single box styles */
+    .signup-box {
+        width: 100%; /* Stretch to full width */
+        max-width: 500px; /* Set a maximum width */
+        background-color: #f8f9fa; /* Background color */
+        border-radius: 15px; /* Rounded corners */
+        padding: 20px; /* Padding inside the box */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        text-align: center; /* Center text */
+    }
+
+    .bg-light {
+        font-weight: bold; /* Ensure the header text is bold */
+        font-size: 1.5rem; /* Adjust font size for better visibility */
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="centered-container">
+    <div class="signup-box">
+        <div class="bg-light rounded-pill px-4 py-3 text-uppercase text-center" style="color:black;">Sign Up Details</div>
+        <br>
+        <form class="row g-4" method="POST" action="/signup/">{% csrf_token %}
+            <div class="col-md-12">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" placeholder="Enter First Name" class="form-control" id="first_name" name="first_name" required>
+            </div>
+            <div class="col-md-12">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" placeholder="Enter Last Name" class="form-control" id="last_name" name="last_name" required>
+            </div>
+            <div class="col-md-12">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" placeholder="Enter Username" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="col-md-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" placeholder="Enter your Email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="col-md-12">
+                <label for="password1" class="form-label">Password</label>
+                <input type="password" placeholder="Enter Password" class="form-control" id="password1" name="password1" required>
+            </div>
+            <div class="col-md-12">
+                <label for="password2" class="form-label">Confirm Password</label>
+                <input type="password" placeholder="Confirm Password" class="form-control" id="password2" name="password2" required>
+            </div>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary" style="border-radius: 10px;">Submit</button>
+            </div>
+        </form>
+        <br>
+    </div>
+</div>
+{% endblock %}

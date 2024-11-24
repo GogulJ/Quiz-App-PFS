@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% block title %} Quiz {% endblock %}
+{% block css %}
+<style>
+
+  /* Custom Button Style for "View Report" */
+.report-btn {
+  background-color: #3399ff; /* Bright orange for prominence */
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.report-btn:hover {
+  background-color: #3399ff; /* Darker shade on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 300px;
+    padding: 10px 10px 10px 10px;
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(114, 177, 240, 0.634), 0 4px 6px -4px rgba(180, 190, 198, 0.4);
+    border-radius: 5px;
+    background-color: #7373df;
+    background: linear-gradient(45deg, #04051dea 0%, #567eec 100%);
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .content .price {
+    color: white;
+    font-weight: 800;
+    font-size: 50px;
+    text-shadow: 0px 0px 10px rgb(255, 255, 255);
+  }
+
+  .content .description {
+    color: rgba(255, 255, 255, 0.734);
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .content .title {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    margin-top: 10px;
+    font-size: 25px;
+    letter-spacing: 1px;
+  }
+
+  button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: none;
+    outline: none;
+    color: rgb(255 255 255);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .75rem;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.536);
+    border-radius: 0.5rem;
+    width: 90%;
+    text-shadow: 0px 4px 18px #ffffff;
+  }
+
+/* From Uiverse.io by bociKond */
+body {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      50% 50% at 100% 0,
+      #3f9bca 0% 5%,       /* primary light blue */
+      #ffffff 6% 15%,      /* white */
+      #3f9bca 16% 25%,     /* primary light blue */
+      #ffffff 26% 35%,     /* white */
+      #3f9bca 36% 45%,     /* primary light blue */
+      #ffffff 46% 55%,     /* white */
+      #3f9bca 56% 65%,     /* primary light blue */
+      #ffffff 66% 75%,     /* white */
+      #3f9bca 76% 85%,     /* primary light blue */
+      #ffffff 86% 95%,     /* white */
+      #0000 96%
+    ),
+    radial-gradient(
+      50% 50% at 0 100%,
+      #3f9bca 0% 5%,       /* primary light blue */
+      #ffffff 6% 15%,      /* white */
+      #3f9bca 16% 25%,     /* primary light blue */
+      #ffffff 26% 35%,     /* white */
+      #3f9bca 36% 45%,     /* primary light blue */
+      #ffffff 46% 55%,     /* white */
+      #3f9bca 56% 65%,     /* primary light blue */
+      #ffffff 66% 75%,     /* white */
+      #3f9bca 76% 85%,     /* primary light blue */
+      #ffffff 86% 95%,     /* white */
+      #0000 96%
+    ),
+    radial-gradient(
+      50% 50%,
+      #3f9bca 0% 5%,       /* primary light blue */
+      #ffffff 6% 15%,      /* white */
+      #3f9bca 16% 25%,     /* primary light blue */
+      #ffffff 26% 35%,     /* white */
+      #3f9bca 36% 45%,     /* primary light blue */
+      #ffffff 46% 55%,     /* white */
+      #3f9bca 56% 65%,     /* primary light blue */
+      #ffffff 66% 75%,     /* white */
+      #3f9bca 76% 85%,     /* primary light blue */
+      #ffffff 86% 95%,     /* white */
+      #0000 96%
+    ),
+    radial-gradient(
+        50% 50%,
+        #3f9bca 0% 5%,       /* primary light blue */
+        #ffffff 6% 15%,      /* white */
+        #3f9bca 16% 25%,     /* primary light blue */
+        #ffffff 26% 35%,     /* white */
+        #3f9bca 36% 45%,     /* primary light blue */
+        #ffffff 46% 55%,     /* white */
+        #3f9bca 56% 65%,     /* primary light blue */
+        #ffffff 66% 75%,     /* white */
+        #3f9bca 76% 85%,     /* primary light blue */
+        #ffffff 86% 95%,     /* white */
+        #0000 96%
+      )
+      38px 38px;
+  background-size: 76px 76px;
+  background-color: #3f9bca; /* primary light blue */
+}
+
+  #btn:hover,
+  #btn:focus {
+    background: var(--gradient) !important;
+    -webkit-background-clip: none !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 5px solid #fff !important;
+    box-shadow: #222 1px 0 10px;
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+{% block body %}
+<br><br><br>
+
+<!-- cards -->
+<div class="container">
+  <div class="container mx-auto mt-2">
+    <div class="row">
+      {% for i in quiz %}
+      <div class="col-md-4">
+        <div class="card">
+          <div class="content">
+            <h5 class="title">{{ i.name }}</h5>
+            <p class="description">{{ i.desc }}</p>
+
+            {% if not request.user.is_staff %}
+              <!-- Button for Regular Users to Attempt Quiz -->
+              <button data-bs-target="#exampleModal" data-bs-toggle="modal" data-time="{{ i.time }}"
+                      data-questions="{{ i.number_of_questions }}" data-name="{{ i.name }}" data-id="{{ i.id }}" 
+                      id="btn" class="modal-button">
+                <i class="fas fa-link"></i> Attempt Quiz
+              </button>
+            {% else %}
+              <!-- Button for Admin to View Report -->
+              <a href="{% url 'generate_pdf_report' i.id %}" class="btn report-btn">
+                <i class="fas fa-file-pdf"></i> View Report
+              </a>
+              
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      {% if user.is_authenticated %}
+      <div class="modal-body" id="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="start-quiz" class="btn btn-primary">Start Quiz</button>
+      </div>
+      {% else %}
+      <div class="modal-body">
+        <h3>Login first to start the quiz</h3>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+  const modalBtns = [...document.getElementsByClassName('modal-button')]
+  const modalBody = document.getElementById('modal-body')
+  const modaltitle = document.getElementById('modal-title')
+  const startQuiz = document.getElementById('start-quiz')
+
+  const url = window.location.href
+
+  modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
+    const id = modalBtn.getAttribute('data-id')
+    const name = modalBtn.getAttribute('data-name')
+    const numberOfQuestions = modalBtn.getAttribute('data-questions')
+    const time = modalBtn.getAttribute('data-time')
+
+    modaltitle.innerHTML = `${name}`
+
+    modalBody.innerHTML = `
+    The ${name} consists of ${numberOfQuestions} questions and hence it is of ${numberOfQuestions} marks. You will be getting exactly ${time} seconds to complete ${numberOfQuestions} multiple choice questions. After completing the questions you can click on the
+          submit button to get your score and to understand the concept in which you made a mistake.<br>
+          All the best for the quiz!!!.
+    `
+
+    startQuiz.addEventListener('click', () => {
+      window.location.href = url + id
+    });
+  }));
+</script>
+{% endblock %}

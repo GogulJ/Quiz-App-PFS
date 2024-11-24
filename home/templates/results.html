@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Results {% endblock %}
+
+{% block body %}
+<div style="max-width: 800px; margin: auto; background-color: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); margin-top: 20px;">
+    <h2 style="text-align: center; font-size: 1.5rem; color: #333;">Results</h2>
+    <table style="width: 100%; margin-top: 20px;" class="table table-hover">
+        <thead style="background-color: #007bff; color: white;">
+            <tr>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">User</th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Quiz</th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Score</th>
+                <th style="padding: 12px; border-bottom: 2px solid #ddd;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in marks %}
+            <tr style="background-color: {% cycle '#f1f8fb' '#ffffff' %};">
+                <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ mark.user }}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ mark.quiz }}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{ mark.score }}</td>
+                <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                    <!-- Delete Button -->
+                    <a href="/delete_result/{{ mark.id }}/" style="background-color: #dc3545; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+                        Delete
+                    </a>
+                    <!-- Send Mail Button -->
+                    <a href="{% url 'send_mail' mark.user.id %}" style="background-color: #28a745; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-left: 10px;">
+                        Send Mail
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
